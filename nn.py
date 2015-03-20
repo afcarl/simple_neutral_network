@@ -13,9 +13,9 @@ class neutral_network:
 	def dsigmod(self, x):
 		return sigmod(x) * (1 - sigmod(x))
 
-	def init_weight(self):
+	def init_weight(self, in_dim, out_dim):
 		# what is the good way t
-		return np.random.rand(self.nfeatures, self.hidden_layers + 1)
+		return np.random.rand(in_dim, out_dim + 1)
 
 	def fit(self, X, y):
 		# X is in n x p format
@@ -23,7 +23,8 @@ class neutral_network:
 		self.nfeatures = X.shape[0]
 		self.nsamples = X.shape[1]
 
-		theta1_o = self.
+		theta1_o = self.init_weight(nfeatures, self.hidden_layers)
+		
 
 	def computeCostFunction(self, X, y):
 
