@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88b06d62-05b8-4abd-95bf-11d776b9bfe4" name="Default" comment="changes&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test.py" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/synthetic_data" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/circle_data.py" afterPath="$PROJECT_DIR$/circle_data.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo.py" afterPath="$PROJECT_DIR$/demo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nn.py" afterPath="$PROJECT_DIR$/nn.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/simple_neutral_network.iml" afterPath="$PROJECT_DIR$/.idea/simple_neutral_network.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/synthetic_data.py" afterPath="$PROJECT_DIR$/synthetic_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="simple_neutral_network.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="demo.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="demo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79746836" vertical-offset="0" max-vertical-offset="567">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="567">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -48,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nn.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="nn.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2856">
-              <caret line="5" column="44" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.21105528" vertical-offset="1869" max-vertical-offset="3108">
+              <caret line="97" column="112" selection-start-line="97" selection-start-column="112" selection-end-line="97" selection-end-column="112" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -124,8 +120,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/synthetic_data.py" />
-        <option value="$PROJECT_DIR$/nn.py" />
         <option value="$PROJECT_DIR$/demo.py" />
+        <option value="$PROJECT_DIR$/nn.py" />
       </list>
     </option>
   </component>
@@ -452,7 +448,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24534942" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.44634378" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21557455" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953465" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -495,8 +491,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/demo.py</url>
-          <line>11</line>
+          <line>9</line>
           <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/nn.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -506,7 +507,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="61" />
+      <option name="time" value="63" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -889,22 +890,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nn.py">
+    <entry file="file://$PROJECT_DIR$/demo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2856">
-          <caret line="5" column="44" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="567">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo.py">
+    <entry file="file://$PROJECT_DIR$/nn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79746836" vertical-offset="0" max-vertical-offset="567">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.21105528" vertical-offset="1869" max-vertical-offset="3108">
+          <caret line="97" column="112" selection-start-line="97" selection-start-column="112" selection-end-line="97" selection-end-column="112" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>

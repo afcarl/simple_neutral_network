@@ -1,9 +1,9 @@
 import numpy as np
 from scipy import optimize
-
+import matplotlib.pyplot as plt
 class neutral_network:
 
-	def __init__(self, hidden_layers, regularized=1, maxiter=500):
+	def __init__(self, hidden_layers,  epoch=1, regularized=1, maxiter=500, show=1):
 		self.hidden_layers = hidden_layers
 		# self.out_dim = out
 		self.regularized = regularized
@@ -12,6 +12,9 @@ class neutral_network:
 		self.maxiter = maxiter
 		self.method = 'TNC'
 		self.iter = 0
+		self.epochs = epoch
+		self.show = show
+
 	def sigmod(self, x):
 		return 1 / (1 + np.exp(-x))
 
@@ -39,8 +42,9 @@ class neutral_network:
 		_, _, _, _, o = self._forward(X, t1, t2)
 		J = np.power((o - y), 2)
 		J = np.sum(J) / self.nsamples
-		print self.iter, J
-		self.iter += 1
+		
+		# print self.iter, J
+		# self.iter += 1
 		return J
 
 	def dCostFunction(self, theta, in_dim, hidden_dim, num_labels, X, y):
@@ -72,7 +76,7 @@ class neutral_network:
 		for (idx, p) in enumerate(y):
 			Y[p][idx] = 1
 		return Y
-		
+
 	def fit(self, X, y):
 		# X is in n x p format
 		# y shou
@@ -84,9 +88,26 @@ class neutral_network:
 		theta1 = self.init_weight(self.nfeatures, self.hidden_layers)
 		theta2 = self.init_weight(self.hidden_layers, self.classes)
 		theta = self.cat(theta1, theta2)
-		options = {'maxiter': self.maxiter}
-		_res = optimize.minimize(self.CostFunction, theta, jac=self.dCostFunction, method=self.method,
+		error_v = np.zeros((self.epochs+1,))
+		# every epoch
+			
+		for i in range(self.epochs + 1):
+
+			J = self.CostFunction(theta, self.nfeatures, self.hidden_layers, self.nsamples, X, Y)
+			options = {'maxiter': self.maxiter}
+			_res = optimize.minimize(self.CostFunction, theta, jac=self.dCostFunction, method=self.method,
 								 args=(self.nfeatures, self.hidden_layers, self.nsamples, X, Y), options=options)
+			print "epoch %d/%d" % (i+1, self.epochs), ": errors: ", _res.fun  
+			error_v[i] = _res.fun
+			theta = _res.x
+
+		if self.show: 
+			plt.figure()
+			plt.title('simple_neutral_network')   # subplot 211 title
+			plt.xlable('number of epoch')
+			plt.ylable('error cost')
+			plt.plot(error_v,'r', linewidth=5)
+			plt.show()
 
 		self.t1, self.t2  = self.uncat(_res.x, self.nfeatures, self.hidden_layers)
 		# print self.t1
