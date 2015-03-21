@@ -90,7 +90,8 @@ class neutral_network:
 		theta = self.cat(theta1, theta2)
 		error_v = np.zeros((self.epochs+1,))
 		# every epoch
-			
+		print "begin training"
+		print "--max iteration: ", self.maxiter
 		for i in range(self.epochs + 1):
 
 			J = self.CostFunction(theta, self.nfeatures, self.hidden_layers, self.nsamples, X, Y)
@@ -104,8 +105,8 @@ class neutral_network:
 		if self.show: 
 			plt.figure()
 			plt.title('simple_neutral_network')   # subplot 211 title
-			plt.xlable('number of epoch')
-			plt.ylable('error cost')
+			plt.xlabel('number of epoch')
+			plt.ylabel('error cost')
 			plt.plot(error_v,'r', linewidth=5)
 			plt.show()
 
@@ -135,6 +136,7 @@ class neutral_network:
 		return out, out.argmax(0)
 
 	def evaluate(self, X, y):
+		print "begin evaluation"
 		prob, label = self.predict(X)
 		acc = 0.0;
 		y = y.reshape((len(label),))
