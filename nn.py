@@ -3,7 +3,7 @@ from scipy import optimize
 import matplotlib.pyplot as plt
 class neutral_network:
 
-	def __init__(self, hidden_layers,  epoch=1, regularized=1, maxiter=500, show=1):
+	def __init__(self, hidden_layers,  epoch=1, regularized=1, maxiter=500, show=1, activate='sigmoid'):
 		self.hidden_layers = hidden_layers
 		# self.out_dim = out
 		self.regularized = regularized
@@ -14,13 +14,23 @@ class neutral_network:
 		self.iter = 0
 		self.epochs = epoch
 		self.show = show
+		self.activationfun = activate
+	def activation(self, x):
+		if self.activationfun == "sigmoid":
+			return 1 / (1 + np.exp(-x))
+		if self.activationfun == "step":
+			return  np.sign(x) + 1
 
-	def sigmod(self, x):
-		return 1 / (1 + np.exp(-x))
+	def dactivation(self, x):
 
-	def dsigmod(self, x):
-		x = self.sigmod(x)
-		return x * (1 - x)
+		if self.activationfun == "sigmoid":
+			x = self.activation(x)
+			x = x * (1 - x)
+		if self.activationfun == "step":
+			x = np.logical_xor(x, np.ones(x.shape))
+			x = 1 * x
+			print x
+		return x
 
 	def init_weight(self, in_dim, out_dim):
 		# what is the good way initalize
@@ -56,10 +66,10 @@ class neutral_network:
 
 		# t1 = t1[1:, :] # remove bias term
 		# t2 = t2[1:, :]
-		sigma3 = -(y - a3) * self.dsigmod(z3) # do not apply dsigmode here? should I
+		sigma3 = -(y - a3) * self.dactivation(z3) # do not apply dsigmode here? should I
 		sigma2 = np.dot(t2, sigma3)
 		term = np.ones((1,num_labels))
-		sigma2 = sigma2 * np.concatenate((term, self.dsigmod(z2)),axis=0)
+		sigma2 = sigma2 * np.concatenate((term, self.dactivation(z2)),axis=0)
 
 		theta2_grad = np.dot(sigma3, a2.T)
 		theta1_grad = np.dot(sigma2[1:,:], a1.T)
@@ -122,12 +132,12 @@ class neutral_network:
 
 		# hidden layer
 		z2 = np.dot(t1.T, a1)
-		a2 = self.sigmod(z2)
+		a2 = self.activation(z2)
 
 		#output
-		a2 = np.concatenate((term1, a2), axis=0) # first add sigmod and then add bias term
+		a2 = np.concatenate((term1, a2), axis=0) # first add activation and then add bias term
 		z3 = np.dot(t2.T, a2)
-		a3 = self.sigmod(z3)
+		a3 = self.activation(z3)
 
 		return a1, z2, a2, z3, a3
 
