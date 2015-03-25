@@ -15,6 +15,8 @@ class neutral_network:
 		self.epochs = epoch
 		self.show = show
 		self.activationfun = activate
+		
+
 	def activation(self, x):
 		if self.activationfun == "sigmoid":
 			return 1 / (1 + np.exp(-x))
@@ -98,31 +100,38 @@ class neutral_network:
 		theta1 = self.init_weight(self.nfeatures, self.hidden_layers)
 		theta2 = self.init_weight(self.hidden_layers, self.classes)
 		theta = self.cat(theta1, theta2)
-		error_v = np.zeros((self.epochs+1,))
+		self.error_v = np.zeros((self.epochs+1,))
+	
 		# every epoch
 		print "begin training"
 		print "--max iteration: ", self.maxiter
-		for i in range(self.epochs + 1):
+		for i in range(self.epochs):
+			
 
 			J = self.CostFunction(theta, self.nfeatures, self.hidden_layers, self.nsamples, X, Y)
 			options = {'maxiter': self.maxiter}
 			_res = optimize.minimize(self.CostFunction, theta, jac=self.dCostFunction, method=self.method,
 								 args=(self.nfeatures, self.hidden_layers, self.nsamples, X, Y), options=options)
 			print "epoch %d/%d" % (i+1, self.epochs), ": errors: ", _res.fun  
-			error_v[i] = _res.fun
+			self.error_v[i] = _res.fun
 			theta = _res.x
-
-		if self.show: 
-			plt.figure()
-			plt.title('simple_neutral_network')   # subplot 211 title
-			plt.xlabel('number of epoch')
-			plt.ylabel('error cost')
-			plt.plot(error_v,'r', linewidth=5)
-			plt.show()
-
 		self.t1, self.t2  = self.uncat(_res.x, self.nfeatures, self.hidden_layers)
-		# print self.t1
-		# print self.t2
+		if self.show: 
+			self.visualize()
+
+		
+		#print self.t1
+		#print self.t2
+		
+	def visualize(self):
+		plt.figure()
+		plt.title('simple_neutral_network')   # subplot 211 title
+		plt.xlabel('number of epoch')
+		plt.ylabel('error cost')
+		plt.plot(self.error_v,'r', linewidth=5)
+
+
+		plt.show()
 
 	def _forward(self, X, t1, t2):
 		# X is in p * n
