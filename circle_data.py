@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 class circle_data:
 	def __init__(self, num=1000,ifplot=0):
-		self.data, self.target, self.plt = self.genData(num, ifplot)
+		self.data, self.target = self.genData(num, ifplot)
 
 	def genData(self, number, ifplot, a = 0.5, b = 0.6, r = 0.4):
 		data = np.random.uniform(0, 1, 2*number).reshape((number, 2))
@@ -12,19 +12,18 @@ class circle_data:
 		# print x.shaper
 		label = np.zeros((number), dtype='int64')
 		# print data.shape
-		# plt.figure()
+		
 		for idx, point in enumerate(data):
 			# print point.shape
 			label[idx] = pow(point[0]-a, 2) + pow(point[1]-b, 2) < pow(r,2)
 
 			if ifplot:
+				plt.figure(1)
 				if label[idx] == 1:
 					plt.plot(point[0], point[1], 'r+')
 				else:
 					plt.plot(point[0], point[1], 'b*')
 
-		if ifplot:
-			return data, label, plt
 
 		# print label
 		return data, label

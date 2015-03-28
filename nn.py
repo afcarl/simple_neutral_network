@@ -89,7 +89,7 @@ class neutral_network:
 			Y[p][idx] = 1
 		return Y
 
-	def fit(self, X, y):
+	def fit(self, X, y, X_t, y_t):
 		# X is in n x p format
 		# y shou
 		self.nfeatures = X.shape[1]
@@ -100,8 +100,8 @@ class neutral_network:
 		theta1 = self.init_weight(self.nfeatures, self.hidden_layers)
 		theta2 = self.init_weight(self.hidden_layers, self.classes)
 		theta = self.cat(theta1, theta2)
-		self.error_v = np.zeros((self.epochs+1,))
-	
+		self.error_v = np.zeros((self.epochs,))
+		self.acc = np.zeros((2,self.epochs))
 		# every epoch
 		print "begin training"
 		print "--max iteration: ", self.maxiter
@@ -114,24 +114,36 @@ class neutral_network:
 								 args=(self.nfeatures, self.hidden_layers, self.nsamples, X, Y), options=options)
 			print "epoch %d/%d" % (i+1, self.epochs), ": errors: ", _res.fun  
 			self.error_v[i] = _res.fun
+
+			self.t1, self.t2  = self.uncat(_res.x, self.nfeatures, self.hidden_layers)
+			self.acc[0][i] = self.evaluate(X, y)
+			self.acc[1][i] = self.evaluate(X_t, y_t)
 			theta = _res.x
-		self.t1, self.t2  = self.uncat(_res.x, self.nfeatures, self.hidden_layers)
-		if self.show: 
-			self.visualize()
+		
+		# if self.show: 
+			# self.visualize()
 
 		
 		#print self.t1
 		#print self.t2
 		
-	def visualize(self):
-		plt.figure()
+	def visualize(self, iter):
+		plt.figure(2)
+		plt.subplot(211)
 		plt.title('simple_neutral_network')   # subplot 211 title
-		plt.xlabel('number of epoch')
+		plt.xlabel('# of epoch')
 		plt.ylabel('error cost')
 		plt.plot(self.error_v,'r', linewidth=5)
+		
+		
+		plt.subplot(212)
+		plt.plot(self.acc[0], linewidth=3, label='train_acc')
+		plt.plot(self.acc[1], linewidth=3, label='test_acc')
+		plt.legend(loc=3, ncol=2, borderaxespad=0.)
 
-
-		plt.show()
+		plt.savefig(iter + 'epochs.png')
+		plt.close(2)
+		# plt.show()
 
 	def _forward(self, X, t1, t2):
 		# X is in p * n
@@ -155,7 +167,7 @@ class neutral_network:
 		return out, out.argmax(0)
 
 	def evaluate(self, X, y):
-		print "begin evaluation"
+		# print "begin evaluation"
 		prob, label = self.predict(X)
 		acc = 0.0;
 		y = y.reshape((len(label),))
